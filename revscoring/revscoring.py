@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 Provides access to a set of utilities for working with revision scorer models.
 
