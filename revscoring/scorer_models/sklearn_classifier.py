@@ -118,7 +118,7 @@ class ScikitLearnClassifier(MLScorerModel):
         :Returns:
             A dict with the fields:
 
-            * predicion -- The most likely class
+            * prediction -- The most likely class
             * probability -- A mapping of probabilities for input classes
                              corresponding to the classes the classifier was
                              trained on.  Generating this probability is
@@ -131,12 +131,14 @@ class ScikitLearnClassifier(MLScorerModel):
         prediction = self.estimator.predict([feature_values])[0]
         labels = self.estimator.classes_
         probas = self.estimator.predict_proba([feature_values])[0]
+        # FIXME: I think zip() is all we need to do here.
         probability = {label: proba for label, proba in zip(labels, probas)}
 
         doc = {
             'prediction': prediction,
             'probability': probability
         }
+        # TODO: Move json formatting up to output layer.
         return util.normalize_json(doc)
 
     def test(self, values_labels, test_statistics=None, store_stats=True):

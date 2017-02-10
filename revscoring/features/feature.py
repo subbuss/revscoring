@@ -28,7 +28,7 @@ class Feature(Dependent):
             A function that will generate a feature value
         return_type : `type`
             A type to compare the return of this function to.
-        dependencies : `list`(`hashable`)
+        depends_on : `list`(`hashable`)
                 An ordered list of dependencies that correspond
                 to the `*args` of `process`
     """
@@ -140,7 +140,7 @@ class Modifier(Feature):
             A function that will generate a feature value
         return_type : `type`
             A type to compare the return of this function to.
-        dependencies : `list`(`hashable`)
+        depends_on : `list`(`hashable`)
                 An ordered list of dependencies that correspond
                 to the `*args` of `process`
     """

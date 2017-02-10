@@ -16,6 +16,8 @@ import yamlconf
 class ScorerModel:
     """
     A model used to score a revision based on a set of features.
+
+    TODO: Include stubs for test() and train()?
     """
 
     def __init__(self, features, version=None, stats=None):
@@ -26,6 +28,7 @@ class ScorerModel:
                 score new observations.
             version : `str`
                 A string describing the version of the model.
+            stats : TODO
         """
         self.features = tuple(features)
         self.version = version
@@ -109,6 +112,7 @@ class MLScorerModel(ScorerModel):
         self.stats = None
 
     def __getattr__(self, attr):
+        # FIXME: explain
         if attr is "trained":
             return None
         else:

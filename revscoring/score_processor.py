@@ -50,6 +50,9 @@ class ScoreProcessor:
         self.process_executor.shutdown()
 
     def score(self, rev_ids, caches=None, cache=None):
+        """
+        Chunk and parallelize scoring.  Uses light threading.
+        """
         if isinstance(rev_ids, int):
             rev_ids = [rev_ids]
 
@@ -61,6 +64,9 @@ class ScoreProcessor:
                 yield score
 
     def _score_batch(self, batch_rev_cache):
+        """
+        Extract data and parallelize scoring, forking into processes.
+        """
         id_batch, caches, cache = batch_rev_cache
         logger.debug("running _score_batch() on {0} rev_ids"
                      .format(len(id_batch)))
@@ -91,6 +97,9 @@ class ScoreProcessor:
 
     @classmethod
     def _process_score(cls, e_r_caches):
+        """
+        Solve features and score.
+        """
         rev_id, scorer_model, extractor, cache, error = e_r_caches
         logger.debug("running _process_score() on {0}".format(rev_id))
 
